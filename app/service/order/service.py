@@ -10,7 +10,7 @@ async def create_new_order(
     order: OrderCreate,
     user: User,
 ) -> Optional[Order]:
-    order_db = Order(**order.model_dump())
+    order_db = Order(user_id=user.id, items=order.items)
     order = await create_order(
         session=session,
         order=order_db,

@@ -19,5 +19,5 @@ class Order(UUIDPkMixin, Base):
     user: Mapped["User"] = relationship(back_populates="orders")
     items: Mapped[dict] = mapped_column(JSON, nullable=False)
     status: Mapped[OrderStatus] = mapped_column(default=OrderStatus.PENDING)
-    total_price: Mapped[Decimal]
+    total_price: Mapped[Decimal] = mapped_column(nullable=True)
     created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow())

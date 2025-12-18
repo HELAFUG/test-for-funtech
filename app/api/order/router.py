@@ -1,5 +1,5 @@
 from typing import Annotated
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Form
 from sqlalchemy.ext.asyncio import AsyncSession
 from api.auth.dependencies import get_current_user
 from core.schemas.user import UserRead
@@ -14,9 +14,9 @@ router = APIRouter(
 
 @router.post("/")
 async def order_new(
-    order: Annotated[OrderCreate, Depends()],
+    order: Annotated[OrderCreate, Form()],
     session: Annotated[AsyncSession, Depends(db_helper.session_getter)],
     user: Annotated[UserRead, Depends(get_current_user)],
 ):
-    order = await create_new_order(user=user)
+    order = await create_new_order(session=session, order=order, user=user)
     return order
