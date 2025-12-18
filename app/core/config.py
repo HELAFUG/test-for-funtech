@@ -41,6 +41,10 @@ class APIConfig(BaseModel):
     prefix: str = "/api"
     v1: APIV1 = APIV1()
 
+    @property
+    def token_url(self):
+        return f"{self.prefix}/token"
+
 
 class Settings(BaseSettings):
     db: DBConfig = DBConfig()
