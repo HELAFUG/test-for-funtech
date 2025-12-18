@@ -40,6 +40,6 @@ async def login_exist_user(
     raise HTTPException(status_code=400, detail="Incorrect username or password")
 
 
-@router.get("/me")
+@router.get("/me", response_model=UserRead)
 async def read_users_me(current_user: Annotated[UserRead, Depends(get_current_user)]):
     return current_user
