@@ -1,9 +1,10 @@
+from typing import List
 from pydantic import BaseModel
 from internal_types.order_types import OrderStatus
 
 
 class OrderBase(BaseModel):
-    items: dict
+    items: List[str]
 
 
 class OrderCreate(OrderBase):
