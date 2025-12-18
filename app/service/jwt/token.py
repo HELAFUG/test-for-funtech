@@ -8,7 +8,7 @@ def encode_token(payload: dict) -> str:
     )
 
 
-def decode_token(payload: dict) -> dict:
+def decode_token(token: str) -> dict:
     return jwt.decode(
-        payload, settings.auth.secret_key, algorithms=[settings.auth.algorithm]
+        token, settings.auth.secret_key, algorithms=[settings.auth.algorithm]
     )
