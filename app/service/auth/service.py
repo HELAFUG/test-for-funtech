@@ -1,5 +1,5 @@
 from typing import Optional
-from datetime import datetime
+from datetime import datetime, timedelta
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.schemas.user import UserCreate, UserRead
 from core.schemas.access_token import AccessToken
@@ -25,7 +25,7 @@ async def get_exist_user(
         token = encode_token(
             payload={
                 "sub": user.username,
-                "exp": datetime.utcnow() + datetime.timedelta(minutes=30),
+                "exp": datetime.utcnow() + timedelta(minutes=30),
                 "iat": datetime.utcnow(),
             }
         )
